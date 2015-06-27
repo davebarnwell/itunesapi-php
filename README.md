@@ -1,6 +1,8 @@
 itunesapi-php
 =============
 
+  [![Build Status](https://scrutinizer-ci.com/g/freshsauce/itunesapi-php/badges/build.png?b=master)](https://scrutinizer-ci.com/g/freshsauce/itunesapi-php/build-status/master) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/freshsauce/itunesapi-php/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/freshsauce/itunesapi-php/?branch=master)
+
   lookup media via the iTunes API, by default it'll look up music by song
   
   It's worth cache the results of seacrhes as the iTunes API can be slow
