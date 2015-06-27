@@ -20,7 +20,7 @@ class iTunesAPI
    * @param string $options 
    * @return object or JSON string if specified in options
    */
-  static function search($find, $options = null) { // search music in english
+  public static function search($find, $options = null) { // search music in english
     $defaultOptions = array(
       'max'     => 5, // max results to return
       'country' => 'GB', // country code of store to search
@@ -42,7 +42,7 @@ class iTunesAPI
     return $optionsToUse['json'] ? $raw : json_decode($raw);
   }
   
-  static function minimalSearch($find, $options = null) { // search and return first matching result else false
+  public static function minimalSearch($find, $options = null) { // search and return first matching result else false
     $results = self::search($find, $options);
     if ($results && $results->resultCount > 0) {
       return $results->results[0];
@@ -55,7 +55,7 @@ class iTunesAPI
   /**
    * @param string $url
    */
-  static private function getData($url) {
+  private static function getData($url) {
     $ch = curl_init($url);
     curl_setopt_array(
       $ch,
