@@ -20,18 +20,18 @@ class iTunesAPI
    * @param string $options 
    * @return object or JSON string if specified in options
    */
-  static function search($find,$options=null) { // search music in english
+  static function search($find, $options = null) { // search music in english
     $defaultOptions = array(
-      'max'     => 5,         // max results to return
-      'country' => 'GB',      // country code of store to search
-      'entity'  => 'song',    // what to search for 
+      'max'     => 5, // max results to return
+      'country' => 'GB', // country code of store to search
+      'entity'  => 'song', // what to search for 
       'media'   => 'music',
       'json'    => false
     );
     if (!is_array($options)) {
       $options = array();
     }
-    $optionsToUse = array_merge($defaultOptions,$options);
+    $optionsToUse = array_merge($defaultOptions, $options);
     $raw = self::getData(
       'https://itunes.apple.com/search?media='.$optionsToUse['media'].
       '&entity='.$optionsToUse['entity'].
@@ -42,8 +42,8 @@ class iTunesAPI
     return $optionsToUse['json'] ? $raw : json_decode($raw);
   }
   
-  static function minimalSearch($find,$options=null) { // search and return first matching result else false
-    $results = self::search($find,$options);
+  static function minimalSearch($find, $options = null) { // search and return first matching result else false
+    $results = self::search($find, $options);
     if ($results && $results->resultCount > 0) {
       return $results->results[0];
     }
@@ -51,6 +51,10 @@ class iTunesAPI
   }
 
   // returns content from the specified URL
+
+  /**
+   * @param string $url
+   */
   static private function getData($url) {
     $ch = curl_init($url);
     curl_setopt_array(
@@ -65,7 +69,7 @@ class iTunesAPI
     );
     $output = curl_exec($ch);
     $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    $redirectUrl = ($http_code == 302) ? curl_getinfo($ch,CURLINFO_EFFECTIVE_URL) : null;
+    $redirectUrl = ($http_code == 302) ? curl_getinfo($ch, CURLINFO_EFFECTIVE_URL) : null;
     $error_no = curl_errno($ch);
     if ($error_no != 0) {
       throw new \Exception(__METHOD__.':Data fetch failed curl error:'.$error_no);
